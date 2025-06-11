@@ -1,0 +1,796 @@
+{
+	"info": {
+		"_postman_id": "69443378-193c-4ba1-8379-14af8128b405",
+		"name": "nestjs-template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29370226",
+		"_collection_link": "https://jdm222.postman.co/workspace/JDM~d81a1810-d371-4198-a7be-fe8f7a352102/collection/29370226-69443378-193c-4ba1-8379-14af8128b405?action=share&source=collection_link&creator=29370226"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "maicolaroyave10@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "ac7ff0da568f6a1688e26dbd3798b017",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Maicol A \",\n  \"email\": \"cutrepez200@gmail.com\",\n  \"password\": \"Ma1234\",\n  \"address\": \"Carrera\",\n  \"phone\": \"3019892002\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/register",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Verifica si la respuesta es exitosa (código 200)\r",
+									"if (pm.response.code === 200) {\r",
+									"    // Parsea el cuerpo de la respuesta\r",
+									"    var responseBody = pm.response.json();\r",
+									"    \r",
+									"    // Extrae el token del cuerpo de la respuesta\r",
+									"    var token = responseBody.body.token;\r",
+									"    \r",
+									"    // Guarda el token en una variable de colección llamada \"TOKEN\"\r",
+									"    pm.collectionVariables.set(\"TOKEN\", token);\r",
+									"    \r",
+									"    // Opcional: Muestra un mensaje en la consola de Postman para confirmar que el token se ha guardado\r",
+									"    console.log(\"Token guardado en la variable de colección TOKEN: \" + token);\r",
+									"} else {\r",
+									"    // Si la respuesta no es exitosa, muestra un mensaje de error\r",
+									"    console.error(\"La respuesta no fue exitosa. Código de estado: \" + pm.response.code);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"cutrepez200@gmail.com\",\n    \"password\": \"Ma1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/login",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"cutrepez200@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/forgot-password",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1dHJlcGV6MjAwQGdtYWlsLmNvbSIsImlhdCI6MTc0MjE0NzY4NiwiZXhwIjoxNzQyMTQ5NDg2fQ.mGZUSu-tXuUxNAQEHmxljF7_rKYkrfadgaT2AI1JuIc\",\r\n    \"password\": \"Ma1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/reset-password",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "File",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "typeEntity",
+									"value": "PET",
+									"type": "text"
+								},
+								{
+									"key": "entityOwnerId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/maicol.alvarez/Downloads/02.03 Certificado-html - Maicol Arroyave (2).pdf",
+									"disabled": true
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/maicol.alvarez/Downloads/reporteExogena2023 (3).xlsx",
+									"disabled": true
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "kPZiAJRhc/Actividad 2 IS2.docx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}file/upload",
+							"host": [
+								"{{URL}}file"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get public file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}public-files/pet/1743916741621-2d330ecf-4c13-4991-884e-f77205c2f4e3.png",
+							"host": [
+								"{{URL}}public-files"
+							],
+							"path": [
+								"pet",
+								"1743916741621-2d330ecf-4c13-4991-884e-f77205c2f4e3.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get private file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}private-files/report/1743652870323-806342479.png",
+							"host": [
+								"{{URL}}private-files"
+							],
+							"path": [
+								"report",
+								"1743652870323-806342479.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}filesDirectory/download/17276388223220.pdf",
+							"host": [
+								"{{URL}}filesDirectory"
+							],
+							"path": [
+								"download",
+								"17276388223220.pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"file\": [\r\n        {\"id\": 23},\r\n        {\"id\": 24},\r\n        {\"id\": 25}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}file/delete",
+							"host": [
+								"{{URL}}file"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create disks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}disk/create",
+							"host": [
+								"{{URL}}disk"
+							],
+							"path": [
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFilesByEntities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"entity\": \"PET\",\r\n    \"idEntities\": [3,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}file/get/",
+							"host": [
+								"{{URL}}file"
+							],
+							"path": [
+								"get",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UploadBase64",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"typeEntity\": \"REPORT\",\r\n    \"entityOwnerId\": 2,\r\n    \"files\":[\r\n        {\r\n            \"name\": \"file 1\",\r\n            \"base64\": \"data:image/png;base64,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\"\r\n        }\r\n    ]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}file/upload-base64",
+							"host": [
+								"{{URL}}file"
+							],
+							"path": [
+								"upload-base64"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/10.3.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Maicol A \",\n  \"email\": \"maicolaroyave10@gmail.com\",\n  \"password\": \"Ma1234\",\n  \"createdAt\": \"2024-12-14\",\n  \"address\": \"Carrera\",\n  \"phone\": \"1\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}users/1",
+							"host": [
+								"{{URL}}users"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}users?page=1&limit=10",
+							"host": [
+								"{{URL}}users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}auth/profile",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}users/19",
+							"host": [
+								"{{URL}}users"
+							],
+							"path": [
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mailer",
+			"item": [
+				{
+					"name": "sendMail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"recipient\":[ \"maicolaroyave10@gmail.com\"],\r\n  \"action\": \"prueba\",\r\n  \"subject\": \"Hola prueba de petsDevOps\",\r\n  \"text\": \"Todos ustedes son mis hijos. ATT: Maicol AA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}mail/send",
+							"host": [
+								"{{URL}}mail"
+							],
+							"path": [
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}mail/logs",
+							"host": [
+								"{{URL}}mail"
+							],
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "healt",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:4001/"
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}

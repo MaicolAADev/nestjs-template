@@ -1,5 +1,5 @@
 /**
- * Script para ejecutar scripts SQL en la base de datos anets de un npm start.
+ * Script para ejecutar scripts SQL en la base de datos antes de un npm start.
  * Se leen los scripts desde un archivo de configuración YAML.
  * Maicol Alvarez el papá de todos ustedes.
  */
@@ -9,20 +9,25 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
 import * as path from 'path';
+import { parse } from 'pg-connection-string';
 
 dotenv.config();
 
-const client = new Client({
-  user: process.env.DB_USERNAME,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: Number(process.env.DB_PORT),
-  ssl:
-    process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
-});
+
 
 async function executeSQL() {
+
+  const connectionOptions = parse(process.env.DATABASE_URL!);
+
+  const client = new Client({
+    user: connectionOptions.user,
+    password: connectionOptions.password,
+    host: connectionOptions.host || 'localhost',
+    port: parseInt(connectionOptions.port || '5432', 10),
+    database: connectionOptions.database,
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
+  });
+
   try {
     await client.connect();
     console.log('✅ Conectado a la base de datos');
