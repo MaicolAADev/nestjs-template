@@ -8,7 +8,8 @@ export interface DatabaseConfig {
 
 export const getDatabaseConfig = (): TypeOrmModuleOptions => {
     const url = new URL(process.env.DATABASE_URL);
-    const type = url.protocol.replace(':', '') as any;
+    // const type = url.protocol.replace(':', '') as any;
+    const type = 'postgres';
     const sslParam = url.searchParams.get('ssl');
 
     return {
