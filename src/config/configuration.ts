@@ -23,7 +23,8 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => {
     extra: {
       ssl: url.searchParams.get('ssl') === 'true' ? {
         rejectUnauthorized: false
-      } : false
+      } : false,
+      family: 4,
     }
   };
 };
