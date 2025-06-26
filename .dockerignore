@@ -1,8 +1,6 @@
 node_modules
 dist
-Dockerfile
-.dockerignore
+.env
+docker-compose.yml
 .git
-
-.vscode
-.database
+*.md

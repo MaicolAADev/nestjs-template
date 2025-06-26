@@ -46,6 +46,7 @@ export class AuthController extends BaseController {
       const response = await this.authService.register(registerDto);
       return this.createdResponse(res, messages.userCreated, response);
     } catch (error) {
+      console.log(error);
       return this.handleError(res, error);
     }
   }

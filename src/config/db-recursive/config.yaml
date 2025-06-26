@@ -2,9 +2,9 @@ sql_scripts:
   - |
     DO $$
     BEGIN
-      IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'pets_owner') THEN
-        CREATE USER pets_owner WITH PASSWORD 'gatostem123';
+      IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'owner') THEN
+        CREATE USER owner WITH PASSWORD 'gatostem123';
       END IF;
     END $$;
-  - "GRANT ALL PRIVILEGES ON DATABASE pets TO pets_owner;"
+  - "GRANT ALL PRIVILEGES ON DATABASE postgres TO owner;"
   - "CREATE SCHEMA IF NOT EXISTS files;"

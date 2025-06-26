@@ -1,22 +1,25 @@
+FROM node:18-alpine AS builder
 
-FROM node:18-alpine
-
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install
+RUN npm ci --only=production
 
 COPY . .
 
-RUN cp .env.example .env
-
-
-# COPY wait-for-it.sh /usr/docker/scripts/wait-for-it.sh
-RUN chmod +x ./docker/scripts/wait-for-it.sh
-
 RUN npm run build
 
-EXPOSE 4000
+FROM node:18-alpine
 
-CMD ["./docker/scripts/wait-for-it.sh", "postgres:5432", "--", "npm", "run", "start:prod"]
+WORKDIR /app
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+EXPOSE $PORT
+
+CMD ["sh", "-c", "npm run start:prod"]
